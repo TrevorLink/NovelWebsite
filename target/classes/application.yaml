@@ -15,3 +15,5 @@ mybatis-plus:
   type-aliases-package: com.yep.server.pojo
   configuration:
     map-underscore-to-camel-case: true
+file:
+  dir: G:\workspace\workspace_myIdea\NovelWebsite\photos

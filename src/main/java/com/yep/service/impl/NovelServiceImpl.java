@@ -7,10 +7,14 @@ import com.yep.mapper.NovelMapper;
 import com.yep.pojo.*;
 import com.yep.service.NovelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,8 @@ import java.util.List;
 public class NovelServiceImpl extends ServiceImpl<NovelMapper, Novel> implements NovelService {
    @Autowired
    private NovelMapper novelMapper;
+   @Value("${file.dir}")
+   private  String fileDir;
    @Override
    public List<Novel> getCurrentUserNovelCollections() {
       User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -54,9 +60,11 @@ public class NovelServiceImpl extends ServiceImpl<NovelMapper, Novel> implements
    @Override
    public RespPage getAllNovels(@RequestParam(defaultValue = "1") Integer currPage,
                                 @RequestParam(defaultValue = "10") Integer size) {
+      QueryWrapper<Novel> wrapper = new QueryWrapper<>();
+      wrapper.eq("status",NovelStatus.ON_LIST);
       Page<Novel> page = new Page<>(currPage,size);
-      Page<Novel> newPage = novelMapper.selectPage(page, null);
-      Long count = novelMapper.selectCount(null);
+      Page<Novel> newPage = novelMapper.selectPage(page, wrapper);
+      Long count = novelMapper.selectCount(wrapper);
       List<Novel> records = newPage.getRecords();
       List<NovelPage> list = new ArrayList<>();
       for(Novel novel : records){
@@ -91,6 +99,7 @@ public class NovelServiceImpl extends ServiceImpl<NovelMapper, Novel> implements
    public RespPage search(String name,Integer currPage,Integer size) {
       QueryWrapper<Novel> wrapper = new QueryWrapper<>();
       wrapper.like("name",name);
+      wrapper.eq("status",NovelStatus.ON_LIST);
       Page<Novel> page = new Page<>(currPage, size);
       List<Novel> records = novelMapper.selectPage(page, wrapper).getRecords();
       Long count = novelMapper.selectCount(wrapper);
@@ -107,6 +116,18 @@ public class NovelServiceImpl extends ServiceImpl<NovelMapper, Novel> implements
       int insert = novelMapper.insert(novel);
       if(insert!=1) return RespBean.error("服务器发生错误，上传失败！");
       return RespBean.ok("上传成功！");
+   }
+
+   @Override
+   public RespBean uploadFile(MultipartFile file) {
+      String filename = file.getOriginalFilename();
+      try {
+         file.transferTo(new File(fileDir, filename));
+      } catch (IOException e) {
+         e.printStackTrace();
+         return RespBean.error("上传失败！");
+      }
+      return RespBean.ok("上传成功！",filename);
    }
 
 }

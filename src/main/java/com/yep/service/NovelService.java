@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yep.pojo.Novel;
 import com.yep.pojo.RespBean;
 import com.yep.pojo.RespPage;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -71,4 +72,6 @@ public interface NovelService extends IService<Novel> {
    RespPage search(String name,Integer currPage,Integer size);
 
    RespBean uploadNovel(Novel novel);
+
+   RespBean uploadFile(MultipartFile file);
 }

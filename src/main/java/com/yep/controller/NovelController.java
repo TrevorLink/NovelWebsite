@@ -5,7 +5,9 @@ import com.yep.pojo.RespBean;
 import com.yep.pojo.RespPage;
 import com.yep.service.NovelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,8 +57,12 @@ public class NovelController {
                            @RequestParam(defaultValue = "10") Integer size){
       return novelService.search(name,currPage,size);
    }
-   @PostMapping("/")
+   @PostMapping("/novel")
    public RespBean uploadNovel(Novel novel){
       return  novelService.uploadNovel(novel);
+   }
+   @PostMapping("/file")
+   public RespBean uploadFile(MultipartFile file){
+      return novelService.uploadFile(file);
    }
 }

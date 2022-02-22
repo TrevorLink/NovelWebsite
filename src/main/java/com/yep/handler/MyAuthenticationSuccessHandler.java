@@ -19,7 +19,7 @@ import java.io.PrintWriter;
  * @date 2022-02-22 15:58
  */
 @Component
-public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
    @Override
    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
       WebUtil.writeObjectAsResponse(httpServletResponse,RespBean.ok("登陆成功！"));

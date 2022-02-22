@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yep.mapper.NovelMapper">
+    <insert id="addCollection">
+        insert into novel_website.user_novel(user_id, novel_id)
+        values (#{userId}, #{id})
+    </insert>
+    <select id="getCurrentUserNovelCollections" resultType="com.yep.pojo.Novel">
+        select *
+        from novel
+                 join user_novel un on novel.id = un.novel_id and user_id = #{userId}
+    </select>
+</mapper>
