@@ -19,5 +19,7 @@ public class Novel {
    private  String author;
    private  String description;
    private  Integer status;//小说当前状态
+   private String imageUrl;
+   private String downloadUrl;
    private  Integer hot;//小说热度
 }
