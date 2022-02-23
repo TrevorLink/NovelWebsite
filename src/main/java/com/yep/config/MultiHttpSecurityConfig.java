@@ -57,7 +57,7 @@ public class MultiHttpSecurityConfig {
       //忽略"/login","/verifyCode"请求，该请求不需要进入Security的拦截器
       @Override
       public void configure(WebSecurity web) throws Exception {
-         web.ignoring().antMatchers("/user/login","/user/register","/doc.html","/v2/api-docs/**","/swagger-resources/**","/webjars/**");
+         web.ignoring().antMatchers("/user/register","/doc.html","/v2/api-docs/**","/swagger-resources/**","/webjars/**");
       }
 
       @Override
@@ -69,7 +69,7 @@ public class MultiHttpSecurityConfig {
                  .formLogin()
                  .usernameParameter("username")
                  .passwordParameter("password")
-//                 .loginPage("/login")
+                 .loginPage("/user/login")
                  .loginProcessingUrl("/user/doLogin")
                  //登录成功处理器
                  .successHandler(myAuthenticationSuccessHandler)
@@ -79,7 +79,7 @@ public class MultiHttpSecurityConfig {
                  .and()
                  //配置登出的逻辑
                  .logout()
-                 .logoutUrl("/logout")
+                 .logoutUrl("/user/logout")
                  //登出成功处理器
                  .logoutSuccessHandler(myLogoutSuccessHandler)
                  .permitAll()
@@ -112,7 +112,7 @@ public class MultiHttpSecurityConfig {
       //忽略"/login","/verifyCode"请求，该请求不需要进入Security的拦截器
       @Override
       public void configure(WebSecurity web) throws Exception {
-         web.ignoring().antMatchers("/css/**","/fonts/**","/img/**","/js/**","/favicon.ico","/index.html","/admin/login");
+         web.ignoring().antMatchers("/css/**","/fonts/**","/img/**","/js/**","/favicon.ico","/index.html");
       }
       //http请求验证和处理规则，响应处理的配置
       @Override

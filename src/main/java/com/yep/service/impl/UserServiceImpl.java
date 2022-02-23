@@ -8,9 +8,14 @@ import com.yep.pojo.User;
 import com.yep.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +27,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
    @Autowired
    private  UserMapper userMapper;
+   @Autowired
+   private PasswordEncoder passwordEncoder;
    //从数据库中获取用户信息
    @Override
    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -29,12 +36,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
       QueryWrapper<User> wrapper = new QueryWrapper<>();
       wrapper.eq("username",username);
       User user = userMapper.selectOne(wrapper);
-      if (user==null) throw  new UsernameNotFoundException("该用户不存在！");
+      if (user==null) throw  new UsernameNotFoundException("用户名或密码错误");
       return user;
    }
 
    @Override
    public RespBean register(User user) {
+      //用户注册的时候先加密再存到数据库中
+      String encode = passwordEncoder.encode(user.getPassword());
+      user.setPassword(encode);
       int insert = userMapper.insert(user);
       if(insert!=1){
          return  RespBean.error("服务器异常，注册失败！");

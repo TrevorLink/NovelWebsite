@@ -30,7 +30,7 @@ public class SwaggerConfig {
    }
    private ApiInfo apiInfo(){
       return  new ApiInfoBuilder()
-              .title("小说网站")
+              .title("接口文档")
               .description("西二合作轮")
               .contact(new Contact("小黄鸭","http://localhost:8080/doc.html","2845964844@qq.com"))
               .version("1.0")

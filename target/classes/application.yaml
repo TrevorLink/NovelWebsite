@@ -4,6 +4,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 123456
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/,file:${file.dir}
 #mapper文件位置配置
 logging:
   level:
@@ -14,6 +17,6 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.yep.server.pojo
   configuration:
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: off
 file:
-  dir: G:\workspace\workspace_myIdea\NovelWebsite\photos
+  dir: G:\workspace\workspace_myIdea\NovelWebsite\file
