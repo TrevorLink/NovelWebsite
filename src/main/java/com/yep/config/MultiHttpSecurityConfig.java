@@ -57,7 +57,7 @@ public class MultiHttpSecurityConfig {
       //忽略"/login","/verifyCode"请求，该请求不需要进入Security的拦截器
       @Override
       public void configure(WebSecurity web) throws Exception {
-         web.ignoring().antMatchers("/user/login","/file","/user/register","/user/checkUsername");
+         web.ignoring().antMatchers("/user/login","/user/register","/doc.html","/v2/api-docs/**","/swagger-resources/**","/webjars/**");
       }
 
       @Override

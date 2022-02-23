@@ -22,8 +22,6 @@ public class User implements UserDetails, Serializable {
    private Integer id;
    private String username;
    private  String password;
-   private List<Novel> collections;
-
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
       return null;
