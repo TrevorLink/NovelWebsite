@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
@@ -37,11 +34,12 @@ public class UserController {
    }
    @ApiOperation(value = "用户登录",notes = "提交登录表单来进行登录，注意登录接口是/user/doLogin")
    @PostMapping("/login")
-   @ApiImplicitParams({
-           @ApiImplicitParam(name = "username",value = "用户名",required = true),
-           @ApiImplicitParam(name = "password",value = "密码",required = true)
-   })
-   public RespBean login(@ApiIgnore User user){
+//   @ApiImplicitParams({
+//           @ApiImplicitParam(name = "username",value = "用户名",required = true),
+//           @ApiImplicitParam(name = "password",value = "密码",required = true)
+//   })
+   public RespBean login(User user){
+//      return  userService.login(user);
       return  RespBean.ok("登陆成功！");
    }
    @ApiOperation(value = "用户注销",notes = "注销接口")

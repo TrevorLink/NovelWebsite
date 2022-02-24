@@ -8,6 +8,9 @@ import com.yep.mapper.NovelMapper;
 import com.yep.pojo.*;
 import com.yep.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,19 +24,11 @@ import java.util.List;
  * @date 2022-02-21 14:42
  */
 @Service
-public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService, UserDetailsService {
+public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
    @Autowired
    private  AdminMapper adminMapper;
    @Autowired
    private NovelMapper novelMapper;
-   @Override
-   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      QueryWrapper<Admin> wrapper = new QueryWrapper<>();
-      wrapper.eq("username",username);
-      Admin admin = adminMapper.selectOne(wrapper);
-      if (admin==null) throw new UsernameNotFoundException("当前管理员不存在！");
-      return admin;
-   }
 
    @Override
    public RespPage getNovelInProgressPage(Integer currPage, Integer size) {
@@ -70,4 +65,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
       }
       return RespBean.ok("删除成功！");
    }
+//
+//   @Override
+//   public RespBean login(Admin admin) {
+//      Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
+//      if (authenticate==null){
+//         return RespBean.error("管理员账号密码错误！");
+//      }
+//      return RespBean.ok("管理员登陆成功！");
+//   }
 }

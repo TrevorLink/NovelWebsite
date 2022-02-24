@@ -37,12 +37,13 @@ public class AdminController {
    }
    @ApiOperation(value = "管理员登录",notes = "管理员账号登录，注意登录的接口是/admin/doLogin")
    @PostMapping("/login")
-   @ApiImplicitParams({
-           @ApiImplicitParam(name = "username",value = "管理员用户名",required = true),
-           @ApiImplicitParam(name = "password",value = "管理员密码",required = true)
-   })
-   public RespBean login(@ApiIgnore Admin admin){
-      return RespBean.ok("管理员登陆成功！");
+//   @ApiImplicitParams({
+//           @ApiImplicitParam(name = "username",value = "管理员用户名",required = true),
+//           @ApiImplicitParam(name = "password",value = "管理员密码",required = true)
+//   })
+   public RespBean login(Admin admin){
+//      return adminService.login(admin);
+      return  RespBean.ok("登陆成功！");
    }
    @ApiOperation(value = "用户注销",notes = "管理员注销接口")
    @PostMapping("/logout")

@@ -135,7 +135,7 @@ public class NovelServiceImpl extends ServiceImpl<NovelMapper, Novel> implements
          e.printStackTrace();
          return RespBean.error("上传失败！");
       }
-      return RespBean.ok("上传成功！","localhost:8080/"+filename);
+      return RespBean.ok("上传成功！","120.24.179.229:8080/"+filename);
    }
 
 }

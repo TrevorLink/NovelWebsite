@@ -10,4 +10,6 @@ import com.yep.pojo.User;
  */
 public interface UserService extends IService<User> {
    RespBean register(User user);
+//
+//   RespBean login(User user);
 }

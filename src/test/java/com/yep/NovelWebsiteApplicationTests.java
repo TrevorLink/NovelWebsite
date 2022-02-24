@@ -24,7 +24,7 @@ class NovelWebsiteApplicationTests {
 @Test
    public void testPassword(){
    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-   String admin = encoder.encode("admin");
+   String admin = encoder.encode("");
    System.out.println(admin);
 }
 @Test
@@ -32,9 +32,5 @@ class NovelWebsiteApplicationTests {
    List<Novel> list = novelMapper.getCurrentUserNovelCollections(1);
    list.stream()
            .forEach(System.out::println);
-}
-@Test
-   public  void testService(){
-   System.out.println(userService.loadUserByUsername("user22"));
 }
    }

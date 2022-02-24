@@ -21,4 +21,6 @@ public interface AdminService extends IService<Admin> {
    RespBean novelSuccess(Integer id);
 
    RespBean deleteNovel(Integer id);
+//
+//   RespBean login(Admin admin);
 }

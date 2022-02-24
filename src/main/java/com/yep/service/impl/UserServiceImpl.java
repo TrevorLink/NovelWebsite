@@ -24,21 +24,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
    @Autowired
    private  UserMapper userMapper;
    @Autowired
    private PasswordEncoder passwordEncoder;
-   //从数据库中获取用户信息
-   @Override
-   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      log.debug("当前登录的用户名：{}",username);
-      QueryWrapper<User> wrapper = new QueryWrapper<>();
-      wrapper.eq("username",username);
-      User user = userMapper.selectOne(wrapper);
-      if (user==null) throw  new UsernameNotFoundException("用户名或密码错误");
-      return user;
-   }
 
    @Override
    public RespBean register(User user) {
@@ -51,4 +41,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
       }
       return RespBean.ok("注册成功！");
    }
+//
+//   @Override
+//   public RespBean login(User user) {
+//      Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+//      if (authenticate==null){
+//         throw  new RuntimeException("登陆失败！");
+//      }
+//      return RespBean.ok("登陆成功！");
+//   }
 }
