@@ -25,5 +25,5 @@ file:
 #  dir: G:\workspace\workspace_myIdea\NovelWebsite\file
      dir: /home/
 server:
-  port: 8081
-#     port: 8080
+#  port: 8081
+     port: 8080

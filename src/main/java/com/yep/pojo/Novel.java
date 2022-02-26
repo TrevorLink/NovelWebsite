@@ -1,5 +1,7 @@
 package com.yep.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @ApiModel("小说实体类")
 @NoArgsConstructor
 public class Novel {
+   @TableId(type = IdType.AUTO)
    @ApiModelProperty("小说ID")
    private  Integer id;
    @ApiModelProperty("小说标题")

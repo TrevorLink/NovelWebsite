@@ -119,9 +119,12 @@ public class NovelServiceImpl extends ServiceImpl<NovelMapper, Novel> implements
 
    @Override
    public RespBean uploadNovel(Novel novel) {
+      log.debug("传入的novel:{}",novel);
       novel.setStatus(NovelStatus.IN_PROGRESS);
       int insert = novelMapper.insert(novel);
-      if(insert!=1) return RespBean.error("服务器发生错误，上传失败！");
+      if(insert!=1) {
+         return RespBean.error("服务器发生错误，上传失败！");
+      }
       return RespBean.ok("上传成功！");
    }
 

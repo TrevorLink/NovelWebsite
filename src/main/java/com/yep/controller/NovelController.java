@@ -88,13 +88,13 @@ public class NovelController {
    @PostMapping("/novel")
    @ApiOperation(value = "上传小说",notes = "主要功能之一，用户通过表单上传小说")
    @ApiImplicitParams({
-           @ApiImplicitParam(name = "name",value = "小说标题",required = true),
-           @ApiImplicitParam(name = "type",value = "小说类型",type = "int",required = true),
-           @ApiImplicitParam(name = "author",value = "小说作者",required = true),
-           @ApiImplicitParam(name = "description",value = "小说描述",required = true),
-           @ApiImplicitParam(name = "imageUrl",value = "小说封面地址",required = true),
-           @ApiImplicitParam(name = "downloadUrl",value = "小说文件地址",required = true),
-           @ApiImplicitParam(name = "hot",value = "小说热度",required = true)
+           @ApiImplicitParam(name = "name",value = "小说标题",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "type",value = "小说类型",type = "int",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "author",value = "小说作者",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "description",value = "小说描述",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "imageUrl",value = "小说封面地址",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "downloadUrl",value = "小说文件地址",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "hot",value = "小说热度",required = true,paramType = "form")
    })
    public RespBean uploadNovel(@ApiIgnore Novel novel){
       return  novelService.uploadNovel(novel);

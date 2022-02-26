@@ -25,8 +25,8 @@ public class UserController {
    private UserService userService;
    @ApiOperation(value = "用户注册",notes="提交用户注册表单进行注册")
    @ApiImplicitParams({
-           @ApiImplicitParam(name = "username",value = "用户名",required = true),
-           @ApiImplicitParam(name = "password",value = "密码",required = true)
+           @ApiImplicitParam(name = "username",value = "用户名",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "password",value = "密码",required = true,paramType = "form")
    })
    @PostMapping("/register")
    public RespBean register(@ApiIgnore User user){
@@ -34,10 +34,10 @@ public class UserController {
    }
    @ApiOperation(value = "用户登录",notes = "提交登录表单来进行登录，注意登录接口是/user/doLogin")
    @PostMapping("/login")
-//   @ApiImplicitParams({
-//           @ApiImplicitParam(name = "username",value = "用户名",required = true),
-//           @ApiImplicitParam(name = "password",value = "密码",required = true)
-//   })
+   @ApiImplicitParams({
+           @ApiImplicitParam(name = "username",value = "用户名",required = true,paramType = "form"),
+           @ApiImplicitParam(name = "password",value = "密码",required = true,paramType = "form")
+   })
    public RespBean login(User user){
 //      return  userService.login(user);
       return  RespBean.ok("登陆成功！");

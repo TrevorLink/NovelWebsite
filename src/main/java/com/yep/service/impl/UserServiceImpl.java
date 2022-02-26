@@ -33,8 +33,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
    @Override
    public RespBean register(User user) {
       //用户注册的时候先加密再存到数据库中
+      log.debug("加密前即将注册的用户数据：{}",user);
       String encode = passwordEncoder.encode(user.getPassword());
       user.setPassword(encode);
+      log.debug("加密后即将注册的用户数据：{}",user);
       int insert = userMapper.insert(user);
       if(insert!=1){
          return  RespBean.error("服务器异常，注册失败！");
